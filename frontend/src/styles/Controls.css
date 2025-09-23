@@ -1,0 +1,14 @@
+.eliminate-btn {
+  padding: 10px 20px;
+  background: crimson;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.eliminate-btn:disabled {
+  background: gray;
+  cursor: not-allowed;
+}
