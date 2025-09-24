@@ -38,7 +38,7 @@ function HomePage() {
 
   return (
     <div className="app-container">
-      <h1>📚 Book Club Eliminator</h1>
+      <h1>Book Eliminator</h1>
 
       {winner ? (
         <Winner winner={winner} />
