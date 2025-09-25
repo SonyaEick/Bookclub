@@ -1,5 +1,5 @@
 body {
-  font-family: Arial, sans-serif;
+  font-family: Times, Times New Roman, serif;
   background: #f5f5f5;
   margin: 0;
   padding: 20px;
@@ -30,5 +30,5 @@ button {
 }
 
 button:hover {
-  background: #0056b3;
+  background: crimson;
 }

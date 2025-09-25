@@ -45,8 +45,10 @@ function HomePage() {
       ) : (
         <>
           <Controls onEliminate={eliminateRandom} disabled={books.length <= 1} />
-          <BookList books={books} />
           {lastEliminated && <h3>❌ Eliminated: {lastEliminated}</h3>}
+
+          <BookList books={books} />
+
         </>
       )}
     </div>
