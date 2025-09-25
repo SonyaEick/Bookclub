@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from api import books, websocket
 
-app = FastAPI(title="Bookclub Eliminator")
+app = FastAPI(title="GNO Bookclub")
 
 app.add_middleware(
     CORSMiddleware,

@@ -14,7 +14,7 @@ books_table = Table(
     Column("id", Integer, primary_key=True),
     Column("title", String, unique=True, index=True),
     # Column("description", String, unique=True, index=True),
-    # Column("added_by", ForeignKey, unique=True, index=True),
+    # Column("added_by", String, unique=True, index=True),
 )
 
 metadata.create_all(engine)
