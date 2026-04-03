@@ -14,8 +14,15 @@ class ConnectionManager:
         self.active_connections.remove(websocket)
 
     async def broadcast(self, message: dict):
+        stale = []
         for connection in self.active_connections:
-            await connection.send_json(message)
+            try:
+                await connection.send_json(message)
+            except Exception:
+                stale.append(connection)
+        for connection in stale:
+            if connection in self.active_connections:
+                self.active_connections.remove(connection)
 
 manager = ConnectionManager()
 
