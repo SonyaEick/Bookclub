@@ -3,8 +3,11 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-d
 import HomePage from "./pages/HomePage";
 
 function App() {
+  const basename =
+    import.meta.env.BASE_URL.replace(/\/$/, "") || "/";
+
   return (
-    <Router>
+    <Router basename={basename}>
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/add" element={<Navigate to="/" replace />} />

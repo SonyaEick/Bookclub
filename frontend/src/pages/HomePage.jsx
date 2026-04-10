@@ -1,8 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
+import { apiUrl, bookclubWsUrl } from "../apiBase";
 import "../styles/HomePage.css";
-
-const API = "http://localhost:8000";
-const WS_URL = "ws://localhost:8000/ws";
 
 const BANNER_DISMISS_MS = 9000;
 
@@ -25,7 +23,7 @@ function HomePage() {
   const bannerTimerRef = useRef(null);
 
   const refreshBooks = useCallback(() => {
-    fetch(`${API}/books/`)
+    fetch(apiUrl("/books/"))
       .then((res) => res.json())
       .then(setBooks);
   }, []);
@@ -33,7 +31,7 @@ function HomePage() {
   useEffect(() => {
     refreshBooks();
 
-    const ws = new WebSocket(WS_URL);
+    const ws = new WebSocket(bookclubWsUrl());
     ws.onmessage = (event) => {
       const data = JSON.parse(event.data);
       if (data.cleared) {
@@ -81,7 +79,7 @@ function HomePage() {
     const t = title.trim();
     if (!t) return;
 
-    await fetch(`${API}/books/add/?title=${encodeURIComponent(t)}`, {
+    await fetch(`${apiUrl("/books/add/")}?title=${encodeURIComponent(t)}`, {
       method: "POST",
     });
     setTitle("");
@@ -89,14 +87,14 @@ function HomePage() {
   };
 
   const deleteBook = async (id) => {
-    await fetch(`${API}/books/${id}`, { method: "DELETE" });
+    await fetch(apiUrl(`/books/${id}`), { method: "DELETE" });
     refreshBooks();
   };
 
   const eliminateRandom = async () => {
     let res;
     try {
-      res = await fetch(`${API}/books/eliminate/`, { method: "POST" });
+      res = await fetch(apiUrl("/books/eliminate/"), { method: "POST" });
     } catch {
       return;
     }
@@ -119,7 +117,7 @@ function HomePage() {
   };
 
   const playAgain = async () => {
-    await fetch(`${API}/books/clear`, { method: "DELETE" });
+    await fetch(apiUrl("/books/clear"), { method: "DELETE" });
     setElimBanner(null);
     setWinner(null);
     refreshBooks();
